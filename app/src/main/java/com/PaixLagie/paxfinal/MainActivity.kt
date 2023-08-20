@@ -3,6 +3,7 @@ package com.PaixLagie.paxfinal
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.Animation
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -20,8 +21,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
+import android.view.animation.ScaleAnimation
 
-
+import kotlinx.android.synthetic.main.activity_main.* // Cette ligne importe la vue ImageView
 
 
 
@@ -69,7 +71,8 @@ fun AnimatedImage() {
 
     val animatedScale by animateFloatAsState(
         targetValue = if (scale == 1f) 1.2f else 1f,
-        animationSpec = tween(1000) // Réglage de la durée de l'animation en millisecondes
+        animationSpec = tween(1000),
+        label = "" // Réglage de la durée de l'animation en millisecondes
     )
 
     scale = animatedScale
@@ -81,6 +84,26 @@ fun AnimatedImage() {
             .size(200.dp)
             .graphicsLayer(scaleX = scale, scaleY = scale)
     )
+}
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+
+    // Répète l'animation toutes les 2 secondes
+    val animation = ScaleAnimation(
+        1f, 1.5f, // Facteur d'échelle de départ et d'arrivée en largeur
+        1f, 1.5f, // Facteur d'échelle de départ et d'arrivée en hauteur
+        androidx.compose.animation.core.Animation.RELATIVE_TO_SELF, 0.5f, // Pivot en X (centre de l'image)
+        android.view.animation.Animation.RELATIVE_TO_SELF, 0.5f // Pivot en Y (centre de l'image)
+    ).apply {
+        duration = 1000 // Durée de chaque animation (1000 ms = 1 seconde)
+        repeatCount = android.view.animation.Animation.INFINITE // Répéter l'animation indéfiniment
+        repeatMode = android.view.animation.Animation.REVERSE // Inverser l'animation lorsqu'elle se répète
+    }
+
+    // Appliquer l'animation à votre ImageView
+    imageView.startAnimation(animation)
+}
 }
 
 
