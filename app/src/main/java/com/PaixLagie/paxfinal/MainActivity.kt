@@ -7,10 +7,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import com.PaixLagie.paxfinal.ui.theme.PaxFinalTheme
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.PaixLagie.paxfinal.ui.theme.PaxFinalTheme
+import androidx.compose.ui.unit.dp
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,16 +37,29 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+    Column(modifier = modifier) { // Utilisez un Column pour organiser les composables verticalement
+        Text(
+            text = "Bonjour $name!",
+            modifier = modifier
+        )
+        Text(
+            text = "Bienvenue sur MedUSE",
+            modifier = modifier
+        )
+        Image(
+            painter = painterResource(id = R.drawable.Ven), // Assurez-vous que Ven.jpg est dans le dossier res/drawable de votre projet
+            contentDescription = "Image Ven",
+            modifier = Modifier
+
+
+        )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     PaxFinalTheme {
-        Greeting("Android")
+        Greeting("Thésée")
     }
 }
