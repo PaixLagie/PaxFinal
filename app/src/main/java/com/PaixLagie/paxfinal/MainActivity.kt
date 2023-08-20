@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Column(modifier = modifier) { // Utilisez un Column pour organiser les composables verticalement
         Text(
-            text = "Bonjour $name!",
+            text = "tax $name!",
             modifier = modifier
         )
         Text(
