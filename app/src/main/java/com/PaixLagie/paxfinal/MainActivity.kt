@@ -21,9 +21,19 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
-import android.view.animation.ScaleAnimation
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import android.view.View
+import android.widget.EditText
+import android.widget.TextView
+import androidx.navigation.NavController
+import androidx.compose.material3.TextField
+import androidx.compose.foundation.layout.padding
 
-import kotlinx.android.synthetic.main.activity_main.* // Cette ligne importe la vue ImageView
+
+
+
 
 
 
@@ -49,7 +59,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Column(modifier = modifier) { // Utilisez un Column pour organiser les composables verticalement
         Text(
-            text = "tax $name!",
+            text = "Pyrotax $name!",
             modifier = modifier
         )
         Text(
@@ -65,6 +75,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         )
     }
 }
+
 @Composable
 fun AnimatedImage() {
     var scale by remember { mutableStateOf(1f) }
@@ -85,26 +96,17 @@ fun AnimatedImage() {
             .graphicsLayer(scaleX = scale, scaleY = scale)
     )
 }
-override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
 
-    // Répète l'animation toutes les 2 secondes
-    val animation = ScaleAnimation(
-        1f, 1.5f, // Facteur d'échelle de départ et d'arrivée en largeur
-        1f, 1.5f, // Facteur d'échelle de départ et d'arrivée en hauteur
-        androidx.compose.animation.core.Animation.RELATIVE_TO_SELF, 0.5f, // Pivot en X (centre de l'image)
-        android.view.animation.Animation.RELATIVE_TO_SELF, 0.5f // Pivot en Y (centre de l'image)
-    ).apply {
-        duration = 1000 // Durée de chaque animation (1000 ms = 1 seconde)
-        repeatCount = android.view.animation.Animation.INFINITE // Répéter l'animation indéfiniment
-        repeatMode = android.view.animation.Animation.REVERSE // Inverser l'animation lorsqu'elle se répète
-    }
+private fun onButtonClick(view: View) {
+    // Get the user's name
+    val editText = findViewById<EditText>(R.id.editText)
+    val name = editText.text.toString()
 
-    // Appliquer l'animation à votre ImageView
-    imageView.startAnimation(animation)
+    // Display the user's name
+    val textView = findViewById<TextView>(R.id.textView)
+    textView.text = "Hello, $name!"
 }
-}
+
 
 
 @Preview(showBackground = true)

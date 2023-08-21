@@ -4,12 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ven"
-        tools:ignore="DuplicateIds,MissingConstraints" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -37,7 +32,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
-        tools:layout_editor_absoluteX="154dp"
-        tools:layout_editor_absoluteY="15dp"
-        tools:ignore="MissingConstraints" />
+        android:onClick="onButtonClick"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
