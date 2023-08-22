@@ -25,11 +25,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.compose.material3.TextField
 import androidx.compose.foundation.layout.padding
+import androidx.databinding.DataBindingUtil.setContentView
+
 
 
 
@@ -51,6 +54,40 @@ class MainActivity : ComponentActivity() {
                     Greeting("Android")
                 }
             }
+        }
+    }
+}
+
+
+
+    private fun onButtonClick(view: View) {
+
+        // Get the user's name
+        val editText = findViewById<EditText>(R.id.editText)
+        val name = editText.text.toString()
+
+        // Display the user's name
+        val textView: TextView = view.findViewById(R.id.bt_1)
+        textView.text = "Hello, $name!"
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Find the button by its id
+        val button = findViewById<Button>(R.id.bt_1)
+
+        // Set an on-click listener for the button
+        button.setOnClickListener {
+            // Get the user's name
+            val editText: EditText = view.findViewById(R.id.bt_1)
+            val name = editText.text.toString()
+
+            // Display the user's name
+            val textView = findViewById<TextView>(R.id.textView)
+            textView.text = "Hello, $name!"
         }
     }
 }
@@ -97,17 +134,6 @@ fun AnimatedImage() {
     )
 }
 
-private fun onButtonClick(view: View) {
-    // Get the user's name
-    val editText = findViewById<EditText>(R.id.editText)
-    val name = editText.text.toString()
-
-    // Display the user's name
-    val textView = findViewById<TextView>(R.id.textView)
-    textView.text = "Hello, $name!"
-}
-
-
 
 @Preview(showBackground = true)
 @Composable
@@ -115,4 +141,15 @@ fun GreetingPreview() {
     PaxFinalTheme {
         Greeting("Thésée")
     }
+}
+private fun onButtonClick(view: View) {
+
+    // Get the user's name
+    val editText: EditText = view.findViewById(R.id.bt_1)
+    val name = editText.text.toString()
+
+    // Display the user's name
+    val textView: TextView = view.findViewById(R.id.bt_1)
+    textView.text = "Hello, $name!"
+
 }
