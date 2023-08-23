@@ -1,6 +1,5 @@
 package com.PaixLagie.paxfinal
 
-import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.Animation
@@ -25,131 +24,66 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.compose.material3.TextField
 import androidx.compose.foundation.layout.padding
 import androidx.databinding.DataBindingUtil.setContentView
+import android.widget.Toast
+import android.app.AlertDialog
+import android.content.DialogInterface
+
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import androidx.databinding.DataBindingUtil
+import com.PaixLagie.paxfinal.databinding.ActivityMainBinding
+import androidx.appcompat.app.AppCompatActivity
 
 
 
+class MainActivity : AppCompatActivity() {
 
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+    val button = binding.bt2 // Assurez-vous que le nom correspond à celui de votre bouton dans la mise en page XML
 
+    button.setOnClickListener {
+        // Créez une boîte de dialogue pour demander le nom de l'utilisateur
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Entrez votre nom")
 
+        val input = EditText(this)
+        builder.setView(input)
 
-
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            PaxFinalTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+        builder.setPositiveButton("OK") { _: DialogInterface, _: Int ->
+            val name = input.text.toString()
+            // Faites quelque chose avec le nom (par exemple, affichez-le)
+            if (name.isNotEmpty()) {
+                // Affichez le nom dans la console
+                println("Nom de l'utilisateur : $name")
             }
         }
-    }
-}
 
-
-
-    private fun onButtonClick(view: View) {
-
-        // Get the user's name
-        val editText = findViewById<EditText>(R.id.editText)
-        val name = editText.text.toString()
-
-        // Display the user's name
-        val textView: TextView = view.findViewById(R.id.bt_1)
-        textView.text = "Hello, $name!"
-
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        // Find the button by its id
-        val button = findViewById<Button>(R.id.bt_1)
-
-        // Set an on-click listener for the button
-        button.setOnClickListener {
-            // Get the user's name
-            val editText: EditText = view.findViewById(R.id.bt_1)
-            val name = editText.text.toString()
-
-            // Display the user's name
-            val textView = findViewById<TextView>(R.id.textView)
-            textView.text = "Hello, $name!"
+        builder.setNegativeButton("Annuler") { dialog: DialogInterface, _: Int ->
+            dialog.cancel()
         }
+
+        builder.show()
     }
 }
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Column(modifier = modifier) { // Utilisez un Column pour organiser les composables verticalement
-        Text(
-            text = "Pyrotax $name!",
-            modifier = modifier
-        )
-        Text(
-            text = "Bienvenue sur MedUSE",
-            modifier = modifier
-        )
-        Image(
-            painter = painterResource(id = R.drawable.ven), // Assurez-vous que ven.jpg est dans le dossier res/drawable de votre projet
-            contentDescription = "Image ven",
-            modifier = Modifier
-
-
-        )
-    }
 }
-
-@Composable
-fun AnimatedImage() {
-    var scale by remember { mutableStateOf(1f) }
-
-    val animatedScale by animateFloatAsState(
-        targetValue = if (scale == 1f) 1.2f else 1f,
-        animationSpec = tween(1000),
-        label = "" // Réglage de la durée de l'animation en millisecondes
-    )
-
-    scale = animatedScale
-
-    Image(
-        painter = painterResource(id = R.drawable.ven), // Assurez-vous d'utiliser le bon nom de fichier
-        contentDescription = "Image Ven",
-        modifier = Modifier
-            .size(200.dp)
-            .graphicsLayer(scaleX = scale, scaleY = scale)
-    )
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    PaxFinalTheme {
-        Greeting("Thésée")
-    }
-}
-private fun onButtonClick(view: View) {
+//private fun onButtonClick(view: View) {
 
     // Get the user's name
-    val editText: EditText = view.findViewById(R.id.bt_1)
-    val name = editText.text.toString()
+   // val editText: EditText = view.findViewById(R.id.bt_1)
+    //val name = editText.text.toString()
 
     // Display the user's name
-    val textView: TextView = view.findViewById(R.id.bt_1)
-    textView.text = "Hello, $name!"
+   // val textView: TextView = view.findViewById(R.id.vbt_1)
+    //textView.text = "Hello, $name!"
 
-}
+
+

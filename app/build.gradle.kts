@@ -20,9 +20,11 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
-            }
         }
-
+        buildFeatures {
+            dataBinding = true
+        }
+    }
 
         buildTypes {
             release {
@@ -82,3 +84,4 @@ android {
 
         implementation("androidx.databinding:databinding-runtime:7.0.0")
     }
+
